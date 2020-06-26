@@ -1,11 +1,14 @@
 # EXEMPLO DE API COM FASTAPI
 
-### Execute
+#### Execute
+
 > python -m pip install -r requirements.txt 
 
-### Execute na CLI
-> python -m uvicorn api:app
+#### Execute na CLI
 
-### Execute no browser 
- > http://127.0.0.1:8000/redoc
+> python -m uvicorn --host 0.0.0.0 api:app
+
+#### Execute no browser
+
+> http://127.0.0.1:8000/redoc
 

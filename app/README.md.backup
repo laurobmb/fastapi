@@ -6,6 +6,6 @@
 ### Execute na CLI
 > python -m uvicorn api:app
 
-### Execute no browser 
+### Execute no b
  > http://127.0.0.1:8000/redoc
 

@@ -1,4 +1,4 @@
-FROM centos/python-38-centos7
+FROM centos/python-38-centos7:latest
 LABEL maintainer="Lauro Gomes <laurobmb@gmail.com>"
 RUN pip install --upgrade pip
 COPY app/ /app

@@ -1,0 +1,53 @@
+---
+- hosts: app
+  become: yes
+  vars:
+    pasta_sistema: opt
+    pasta_app: fastapi
+    packages:
+      - vim
+      - rsync
+      - podman
+      - cockpit
+      - cockpit-dashboard.noarch
+      - cockpit-podman.noarch
+      - cockpit-ws
+
+  tasks:
+
+    - name: instalando pacotes
+      dnf:
+        name: '{{packages}}'
+        state: present
+
+    - name: upgrade all packages
+      dnf:
+        name: "*"
+        state: latest
+
+    - name: upgrade all security packages 
+      dnf:
+        name: "*"
+        state: latest
+        security: yes
+
+    - name: Autoremove unneeded packages installed as dependencies
+      dnf:
+        autoremove: yes
+
+    - name: Resetando serviço
+      systemd:
+        name: cockpit
+        state: started
+        enabled: yes
+        daemon_reload: yes
+
+    - name: Copiando fastapi
+      synchronize:
+        src: ./app
+        dest: "/{{pasta_sistema}}/{{pasta_app}}/"
+        delete: yes
+        recursive: yes
+
+    - name: start container
+      shell: cd /{{pasta_sistema}}/{{pasta_app}}/app && bash start.sh 

@@ -27,6 +27,6 @@ or
 
 #### Kubernetes
 
-> kubectl apply -f fastapi.yaml 
+> kubectl apply -f k8s/deployment.yaml
 
 [github.com](https://github.com/laurobmb)

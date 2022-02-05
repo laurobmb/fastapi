@@ -6,7 +6,7 @@
 
 #### Execute na CLI
 
-> python -m uvicorn --host 0.0.0.0 api:app
+> python -m uvicorn --host 0.0.0.0 app:app
 
 #### Execute no browser
 

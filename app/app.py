@@ -1,6 +1,9 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from pydantic import BaseModel
 import sys
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 
 import subprocess
 from subprocess import Popen
@@ -71,9 +74,15 @@ async def returnindex():
     indexhtml()
     return FileResponse('/tmp/index.html')
 
-
 @app.get("/version")
 async def read_root():
     version = f"{sys.version_info.major}.{sys.version_info.minor}"
     message = f"FastAPI rodando em Uvicorn. Usando Python {version}"
     return {"message": message}
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
+templates = Jinja2Templates(directory="templates")
+
+@app.get("/items/{id}", response_class=HTMLResponse)
+async def read_item(request: Request, id: str):
+    return templates.TemplateResponse("item.html", {"request": request, "id": id})

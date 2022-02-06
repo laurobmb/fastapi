@@ -8,8 +8,14 @@ from fastapi.responses import FileResponse
 import subprocess
 from subprocess import Popen
 
+
+app=FastAPI()
+
 path_to_output_file = '/tmp/index.html'
 myoutput = open(path_to_output_file,'w+')
+app.mount("/static", StaticFiles(directory="static"), name="static")
+templates = Jinja2Templates(directory="templates")
+
 
 def indexhtml():
     p = Popen(["ls","-lha"],
@@ -45,8 +51,6 @@ def indexhtml():
     output
 
 
-app=FastAPI()
-
 class ModeloBase(BaseModel):
     usuario: str
     nome: str
@@ -54,7 +58,7 @@ class ModeloBase(BaseModel):
     cpf: int
     idade: int
 
-@app.get("/", response_model=ModeloBase)
+@app.get("/json", response_model=ModeloBase)
 async def modelo001():
     return ModeloBase(
         usuario = "laurobmb",
@@ -74,14 +78,16 @@ async def returnindex():
     indexhtml()
     return FileResponse('/tmp/index.html')
 
+@app.get("/")
+async def returnindex():
+    indexhtml()
+    return FileResponse('page1.html')
+
 @app.get("/version")
 async def read_root():
     version = f"{sys.version_info.major}.{sys.version_info.minor}"
     message = f"FastAPI rodando em Uvicorn. Usando Python {version}"
     return {"message": message}
-
-app.mount("/static", StaticFiles(directory="static"), name="static")
-templates = Jinja2Templates(directory="templates")
 
 @app.get("/items/{id}", response_class=HTMLResponse)
 async def read_item(request: Request, id: str):

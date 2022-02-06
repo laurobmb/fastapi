@@ -8,14 +8,14 @@ from fastapi.responses import FileResponse
 import subprocess
 from subprocess import Popen
 
-
 app=FastAPI()
 
 path_to_output_file = '/tmp/index.html'
-myoutput = open(path_to_output_file,'w+')
+
+myoutput = open(path_to_output_file,'w')
+
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
-
 
 def indexhtml():
     p = Popen(["ls","-lha"],
@@ -50,7 +50,6 @@ def indexhtml():
     output, errors = p.communicate()
     output
 
-
 class ModeloBase(BaseModel):
     usuario: str
     nome: str
@@ -75,6 +74,8 @@ async def modelo002():
 
 @app.get("/info")
 async def returnindex():
+    with open(path_to_output_file,'w') as f:
+        pass
     indexhtml()
     return FileResponse('/tmp/index.html')
 

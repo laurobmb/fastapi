@@ -32,7 +32,8 @@ async def modelo003():
     DATE = subprocess.check_output(["date"], shell=True,universal_newlines=True)
     UPTIME = subprocess.check_output(["uptime"], shell=True,universal_newlines=True)
     HOSTNAME = subprocess.check_output(["hostname"], shell=True,universal_newlines=True)
-    return DATE+UPTIME+HOSTNAME
+    result = DATE,"\n",UPTIME,"\n",HOSTNAME
+    return result
 
 @app.get("/version")
 async def read_root():

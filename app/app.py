@@ -5,7 +5,7 @@ import sys
 import subprocess
 from subprocess import Popen
 
-path_to_output_file = 'index.html'
+path_to_output_file = '/tmp/index.html'
 myoutput = open(path_to_output_file,'w+')
 
 def indexhtml():
@@ -69,7 +69,7 @@ async def modelo002():
 @app.get("/info")
 async def returnindex():
     indexhtml()
-    return FileResponse('index.html')
+    return FileResponse('/tmp/index.html')
 
 
 @app.get("/version")

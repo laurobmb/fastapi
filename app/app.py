@@ -18,7 +18,7 @@ async def modelo001():
         usuario = "laurobmb",
         nome = "Lauro",
         sobrenome = "Gomes",
-        cpf = '83789458934789573',
+        cpf = '321312321',
         idade = 37
     )
 

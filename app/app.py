@@ -1,7 +1,46 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-import subprocess
 import sys
+
+import subprocess
+from subprocess import Popen
+
+path_to_output_file = 'index.html'
+myoutput = open(path_to_output_file,'w+')
+
+def indexhtml():
+    p = Popen(["ls","-lha"],
+        stdout=myoutput,
+        stderr=subprocess.PIPE,
+        universal_newlines=True
+    )
+    output, errors = p.communicate()
+    output
+
+    p = Popen(["date"],
+        stdout=myoutput,
+        stderr=subprocess.PIPE,
+        universal_newlines=True
+    )
+    output, errors = p.communicate()
+    output
+    
+    p = Popen(["hostname"],
+        stdout=myoutput,
+        stderr=subprocess.PIPE,
+        universal_newlines=True
+    )
+    output, errors = p.communicate()
+    output
+
+    p = Popen(["uptime"],
+        stdout=myoutput,
+        stderr=subprocess.PIPE,
+        universal_newlines=True
+    )
+    output, errors = p.communicate()
+    output
+
 
 app=FastAPI()
 
@@ -28,12 +67,10 @@ async def modelo002():
     return cmd
 
 @app.get("/info")
-async def modelo003():
-    DATE = subprocess.check_output(["date"], shell=True,universal_newlines=True)
-    UPTIME = subprocess.check_output(["uptime"], shell=True,universal_newlines=True)
-    HOSTNAME = subprocess.check_output(["hostname"], shell=True,universal_newlines=True)
-    result = DATE,"\n",UPTIME,"\n",HOSTNAME
-    return result
+async def returnindex():
+    indexhtml()
+    return FileResponse('index.html')
+
 
 @app.get("/version")
 async def read_root():

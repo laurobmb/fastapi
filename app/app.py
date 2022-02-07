@@ -16,6 +16,43 @@ myoutput = open(path_to_output_file,'w')
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
+def hostname():
+    process = subprocess.run(['hostname'], 
+        check=True, 
+        stdout=subprocess.PIPE, 
+        universal_newlines=True
+    )
+    output = process.stdout
+    return output
+
+def date():
+    process = subprocess.run(['date'], 
+        check=True, 
+        stdout=subprocess.PIPE, 
+        universal_newlines=True
+    )
+    output = process.stdout
+    return output
+
+def uptime():
+    process = subprocess.run(['uptime'], 
+        check=True, 
+        stdout=subprocess.PIPE, 
+        universal_newlines=True
+    )
+    output = process.stdout
+    return output
+
+def lss():
+    process = subprocess.run(['ls','-lha'], 
+        check=True, 
+        stdout=subprocess.PIPE, 
+        universal_newlines=True
+    )
+    output = process.stdout
+    return output
+
+
 def indexhtml():
     p = Popen(["ls","-lha"],
         stdout=myoutput,
@@ -56,6 +93,12 @@ class ModeloBase(BaseModel):
     cpf: int
     idade: int
 
+class infos(BaseModel):
+    date: str
+    arquivos: str
+    uptime: str
+    hostname: str
+
 @app.get("/")
 async def returnindex():
     indexhtml()
@@ -72,12 +115,14 @@ async def modelo001():
         idade = 37
     )
 
-
-@app.get("/date")
-async def modelo002():
-    cmd = subprocess.check_output("date")
-    return cmd
-
+@app.get("/infos", response_model=infos)
+async def infos_web():
+    return infos(
+        date = date(),
+        arquivos = lss(),
+        uptime = uptime(),
+        hostname = hostname()
+    )
 
 @app.get("/info")
 async def returnindex():

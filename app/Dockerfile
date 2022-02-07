@@ -4,5 +4,5 @@ RUN pip install --upgrade pip
 COPY . /app
 WORKDIR /app
 RUN python -m pip install -r requirements.txt 
-EXPOSE 8000
+EXPOSE 8080
 CMD [ "uvicorn", "--host", "0.0.0.0", "app:app", "--reload" ]

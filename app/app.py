@@ -1,4 +1,5 @@
 import subprocess,sys
+import uvicorn
 
 from fastapi import FastAPI, Request
 from pydantic import BaseModel
@@ -16,6 +17,22 @@ myoutput = open(path_to_output_file,'w')
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
+
+class ModeloBase(BaseModel):
+    usuario: str
+    nome: str
+    sobrenome: str
+    cpf: int
+    idade: int
+
+
+class infos(BaseModel):
+    date: str
+    arquivos: str
+    uptime: str
+    hostname: str
+
+
 def hostname():
     process = subprocess.run(['hostname'], 
         check=True, 
@@ -24,6 +41,7 @@ def hostname():
     )
     output = process.stdout
     return output
+
 
 def date():
     process = subprocess.run(['date'], 
@@ -34,6 +52,7 @@ def date():
     output = process.stdout
     return output
 
+
 def uptime():
     process = subprocess.run(['uptime'], 
         check=True, 
@@ -42,6 +61,7 @@ def uptime():
     )
     output = process.stdout
     return output
+
 
 def lss():
     process = subprocess.run(['ls','-lha'], 
@@ -86,18 +106,6 @@ def indexhtml():
     output, errors = p.communicate()
     output
 
-class ModeloBase(BaseModel):
-    usuario: str
-    nome: str
-    sobrenome: str
-    cpf: int
-    idade: int
-
-class infos(BaseModel):
-    date: str
-    arquivos: str
-    uptime: str
-    hostname: str
 
 @app.get("/")
 async def returnindex():
@@ -115,6 +123,7 @@ async def modelo001():
         idade = 37
     )
 
+
 @app.get("/infos", response_model=infos)
 async def infos_web():
     return infos(
@@ -123,6 +132,7 @@ async def infos_web():
         uptime = uptime(),
         hostname = hostname()
     )
+
 
 @app.get("/info")
 async def returnindex():
@@ -148,3 +158,7 @@ async def read_root():
 @app.get("/items/{id}", response_class=HTMLResponse)
 async def read_item(request: Request, id: str):
     return templates.TemplateResponse("item.html", {"request": request, "id": id})
+
+
+if __name__ == '__main__':
+    uvicorn.run(app, host="0.0.0.0", port=8000)

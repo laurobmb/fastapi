@@ -90,14 +90,6 @@ def indexhtml():
     output, errors = p.communicate()
     output
     
-    p = Popen(["hostname"],
-        stdout=myoutput,
-        stderr=subprocess.PIPE,
-        universal_newlines=True
-    )
-    output, errors = p.communicate()
-    output
-
     p = Popen(["uptime"],
         stdout=myoutput,
         stderr=subprocess.PIPE,

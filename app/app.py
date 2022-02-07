@@ -11,7 +11,6 @@ from subprocess import Popen
 app=FastAPI()
 
 path_to_output_file = '/tmp/index.html'
-
 myoutput = open(path_to_output_file,'w')
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -57,6 +56,12 @@ class ModeloBase(BaseModel):
     cpf: int
     idade: int
 
+@app.get("/")
+async def returnindex():
+    indexhtml()
+    return FileResponse('pages/index.html')
+
+
 @app.get("/json", response_model=ModeloBase)
 async def modelo001():
     return ModeloBase(
@@ -67,10 +72,12 @@ async def modelo001():
         idade = 37
     )
 
+
 @app.get("/date")
 async def modelo002():
     cmd = subprocess.check_output("date")
     return cmd
+
 
 @app.get("/info")
 async def returnindex():
@@ -79,16 +86,19 @@ async def returnindex():
     indexhtml()
     return FileResponse('/tmp/index.html')
 
-@app.get("/")
+
+@app.get("/page1")
 async def returnindex():
     indexhtml()
-    return FileResponse('page1.html')
+    return FileResponse('pages/page1.html')
+
 
 @app.get("/version")
 async def read_root():
     version = f"{sys.version_info.major}.{sys.version_info.minor}"
     message = f"FastAPI rodando em Uvicorn. Usando Python {version}"
     return {"message": message}
+
 
 @app.get("/items/{id}", response_class=HTMLResponse)
 async def read_item(request: Request, id: str):

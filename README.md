@@ -16,5 +16,9 @@ This project is using FASTAPI inside a container. Just compile the Dockerfile an
     kubectl apply -f k8s/deployment.yaml
 #### Deploy OCP
     oc new-project fastapi
+    
     oc new-app --name fastapi --labels app=fastapi https://github.com/laurobmb/fastapi.git#master --context-dir app --strategy=docker
+
+    oc new-app --name fastapi --labels app=fastapi https://github.com/laurobmb/fastapi.git#master --context-dir app --strategy=source
+
     

@@ -12,7 +12,7 @@ spec:
     targetPort: 8000
   to:
     kind: Service
-    name: fastapi
+    name: fastapi-service
     weight: 100
 status:
   ingress:

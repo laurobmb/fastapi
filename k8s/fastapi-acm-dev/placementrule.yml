@@ -1,0 +1,16 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  labels:
+    app: fastapi-25gxs-dev
+  name: fastapi-25gxs-dev-placement-1
+  namespace: fastapi-dev
+spec:
+  clusterSelector:
+    matchExpressions:
+      - key: purpose
+        operator: In
+        values:
+          - development
+          - production

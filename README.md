@@ -21,4 +21,6 @@ This project is using FASTAPI inside a container. Just compile the Dockerfile an
 
     oc new-app --name fastapi --labels app=fastapi https://github.com/laurobmb/fastapi.git#master --context-dir app --strategy=source
 
+    oc expose service fastapi
     
+    oc expose service fastapi --name fastapi-hml --hostname fastapi-fastapi.hml.lagomes.rhbr-lab.com

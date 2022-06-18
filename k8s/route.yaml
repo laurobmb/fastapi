@@ -1,0 +1,21 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  creationTimestamp: null
+  labels:
+    app: fastapi
+  name: fastapi-route
+  namespace: fastapi
+spec:
+  host: "PATCH_ME"
+  port:
+    targetPort: 8080
+  to:
+    kind: Service
+    name: fastapi
+    weight: 100
+status:
+  ingress:
+  - conditions:
+    - status: "True"
+      type: Admitted

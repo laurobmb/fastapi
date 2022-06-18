@@ -1,11 +1,4 @@
 ---
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: fastapi
-  labels:
-    name: fastapi
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -29,40 +22,3 @@ spec:
         ports:
         - name: http-port
           containerPort: 8000
-
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: fastapi-service
-  namespace: fastapi  
-spec:
-  type: ClusterIP
-  selector:
-    app: fastapi
-  ports:
-  - port: 80
-    targetPort: 8000
-    protocol: TCP
-
-
----
-apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
-metadata:
-  name: fastapi-ingress
-  namespace: fastapi
-  annotations:
-   kubernetes.io/ingress.class: nginx
-
-spec:
-  rules:
-
-  - host: fastapi.conectado.local
-    http:
-      paths:
-      - backend:
-          serviceName: fastapi-service
-          servicePort: 80
-        path: /

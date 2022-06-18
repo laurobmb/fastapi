@@ -16,4 +16,4 @@ patches:
   patch: |-
     - op: replace
       path: /spec/host
-      value: "bgd-bgd.apps.lagomes.rhbr-lab.com"
+      value: "f.apps.lagomes.rhbr-lab.com"

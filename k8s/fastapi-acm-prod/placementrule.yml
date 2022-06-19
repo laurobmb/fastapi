@@ -4,7 +4,7 @@ kind: PlacementRule
 metadata:
   labels:
     app: fastapi-25gxs-prod
-  name: fastapi-25gxs-prod-placement-1
+  name: fastapi-25gxs-prod-placement
   namespace: fastapi-prod
 spec:
   clusterSelector:

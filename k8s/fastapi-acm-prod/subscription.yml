@@ -8,11 +8,11 @@ metadata:
     apps.open-cluster-management.io/reconcile-option: merge
   labels:
     app: fastapi-25gxs-prod
-  name: fastapi-25gxs-prod-subscription-1
+  name: fastapi-25gxs-prod-subscription
   namespace: fastapi-prod
 spec:
   channel: ggithubcom-laurobmb-fastap-ns/ggithubcom-laurobmb-fastap
   placement:
     placementRef:
       kind: PlacementRule
-      name: fastapi-25gxs-prod-placement-1
+      name: fastapi-25gxs-prod-placement

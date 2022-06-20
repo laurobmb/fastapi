@@ -2,8 +2,8 @@
 apiVersion: app.k8s.io/v1beta1
 kind: Application
 metadata:
-  name: fastapi-25gxs-dev
-  namespace: fastapi-dev
+  name: fastapi
+  namespace: fastapi
 spec:
   componentKinds:
   - group: apps.open-cluster-management.io
@@ -14,4 +14,4 @@ spec:
       - key: app
         operator: In
         values: 
-          - fastapi-25gxs-dev
+          - fastapi

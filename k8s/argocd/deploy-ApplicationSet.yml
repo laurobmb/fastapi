@@ -32,7 +32,7 @@ spec:
       source:
         repoURL: https://github.com/laurobmb/fastapi
         targetRevision: master
-        path: k8s/
+        path: k8s/overlays/25gxs-dev
       destination:
         namespace: fastapi
         server: '{{url}}'

@@ -17,9 +17,9 @@ spec:
       containers:
       - name: fastapi
         image: quay.io/lagomes/fastapi:latest
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         env:
-        - name: ENVIROMENT
+        - name: ENVIROMENT_INFO
           value: "beta"
         ports:
         - name: http-port
@@ -31,3 +31,15 @@ spec:
           limits:
             cpu: 500m
             memory: 128Mi
+        volumeMounts:
+        - name: password
+          mountPath: /opt/secrets
+        - name: config
+          mountPath: /opt/config
+      volumes:
+      - name: password
+        secret:
+          secretName: fastapi-secret
+      - name: config
+        configMap:
+          name: fastapi-cm

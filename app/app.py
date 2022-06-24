@@ -119,7 +119,7 @@ async def modelo001():
     )
 
 
-@app.get("/infos", response_model=infos)
+@app.get("/info", response_model=infos)
 async def infos_web():
     return infos(
         date = date(),
@@ -129,12 +129,7 @@ async def infos_web():
     )
 
 
-@app.get("/info")
-async def returnindex():
-    return ENVIROMENT_VERSION
-
-
-@app.get("/page1")
+@app.get("/page")
 async def returnindex():
     indexhtml()
     return FileResponse('pages/page1.html')
@@ -143,7 +138,7 @@ async def returnindex():
 @app.get("/version")
 async def read_root():
     version = f"{sys.version_info.major}.{sys.version_info.minor}"
-    message = f"FastAPI rodando em Uvicorn. Usando Python {version}"
+    message = f"FastAPI rodando em Uvicorn. Usando Python de {ENVIROMENT_VERSION} {version}"
     return {"message": message}
 
 

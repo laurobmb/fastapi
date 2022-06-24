@@ -5,14 +5,49 @@ kind: Kustomization
 bases:
 - ../../base
 
+namePrefix: prod-
+
+namespace: fastapi-prod 
+
+commonLabels:
+  env: fastapi-prod
+
 patches:
 - target:
     version: v1
     group: route.openshift.io
     kind: Route
     name: fastapi-route
-    namespace: fastapi
   patch: |-
     - op: replace
       path: /spec/host
       value: "fastapi-prod.apps.lagomes.rhbr-lab.com"
+- target:
+    version: v1
+    group: apps
+    kind: Deployment
+    name: fastapi-deployment
+  patch: |-
+    - op: replace
+      path: /spec/replicas
+      value: 4
+
+- target:
+    version: v1
+    group: route.openshift.io
+    kind: Route
+    name: fastapi-route
+  patch: |-
+    - op: replace
+      path: /spec/to/name
+      value: "prod-fastapi-service"
+
+- target:
+    version: v1
+    group: apps
+    kind: Service
+    name: fastapi
+  patch: |-
+    - op: replace
+      path: /metadata/name
+      value: "fastapi-prod"      

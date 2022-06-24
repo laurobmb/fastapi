@@ -3,7 +3,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: fastapi-deployment
-  namespace: fastapi
 spec:
   replicas: 1
   selector:
@@ -17,8 +16,15 @@ spec:
     spec:
       containers:
       - name: fastapi
-        image: quay.io/laurobmb/fastapi:latest
+        image: quay.io/lagomes/fastapi:latest
         imagePullPolicy: Always
         ports:
         - name: http-port
           containerPort: 8000
+        resources:
+          requests:
+            cpu: 200m
+            memory: 64Mi
+          limits:
+            cpu: 500m
+            memory: 128Mi

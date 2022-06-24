@@ -5,7 +5,6 @@ metadata:
   labels:
     app: fastapi
   name: fastapi-route
-  namespace: fastapi
 spec:
   host: "PATCH_ME"
   port:

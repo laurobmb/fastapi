@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: fastapi
-        image: quay.io/laurobmb/python_fastapi:latest
+        image: quay.io/laurobmb/fastapi:latest
         imagePullPolicy: Always
         ports:
         - name: http-port

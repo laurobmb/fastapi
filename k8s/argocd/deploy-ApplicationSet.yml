@@ -9,11 +9,11 @@ spec:
   - list:
       elements:
       - cluster: cluster-dev
-        url: https://api.25gxs-dev.sandbox1612.opentlc.com:6443
+        url: https://api.developer2.acm-lagomes.rhbr-lab.com:6443
       - cluster: cluster-prod
-        url: https://api.25gxs-prod.sandbox1612.opentlc.com:6443
+        url: https://api.production.acm-lagomes.rhbr-lab.com:6443
       - cluster: cluster-hub
-        url: https://api.cluster-25gxs.sandbox1612.opentlc.com:6443
+        url: https://api.lagomes.rhbr-lab.com:6443
   - clusterDecisionResource:
       configMapRef: acm-placement
       labelSelector:

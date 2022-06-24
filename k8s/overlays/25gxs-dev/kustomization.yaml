@@ -15,4 +15,4 @@ patches:
   patch: |-
     - op: replace
       path: /spec/host
-      value: "f.apps.lagomes.rhbr-lab.com"
+      value: "fastapi-dev.apps.lagomes.rhbr-lab.com"

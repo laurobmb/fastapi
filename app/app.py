@@ -1,4 +1,6 @@
-import subprocess,sys
+import subprocess
+import sys
+import os
 import uvicorn
 
 from fastapi import FastAPI, Request
@@ -17,6 +19,7 @@ myoutput = open(path_to_output_file,'w')
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
+ENVIROMENT_VERSION = os.getenv('ENVIROMENT')
 
 class ModeloBase(BaseModel):
     usuario: str
@@ -128,10 +131,7 @@ async def infos_web():
 
 @app.get("/info")
 async def returnindex():
-    with open(path_to_output_file,'w') as f:
-        pass
-    indexhtml()
-    return FileResponse('/tmp/index.html')
+    return ENVIROMENT_VERSION
 
 
 @app.get("/page1")

@@ -18,6 +18,9 @@ spec:
       - name: fastapi
         image: quay.io/lagomes/fastapi:latest
         imagePullPolicy: Always
+        env:
+        - name: ENVIROMENT
+          value: "beta"
         ports:
         - name: http-port
           containerPort: 8000

@@ -50,4 +50,16 @@ patches:
   patch: |-
     - op: replace
       path: /metadata/name
-      value: "fastapi-prod"      
+      value: "fastapi-prod"
+
+- target:
+    version: v1
+    group: apps
+    kind: Deployment
+    name: fastapi-deployment
+  patch: |-
+    - op: add
+      path: "/spec/template/spec/containers/0/env/-"
+      value:
+        name: ENVIROMENT
+        value: "prod"

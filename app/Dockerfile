@@ -6,4 +6,4 @@ WORKDIR /app
 RUN python -m pip install -r requirements.txt 
 EXPOSE 8080
 ENV ENVIROMENT=env
-CMD [ "uvicorn", "--host", "0.0.0.0", "app:app", "--reload" ]
+CMD [ "python", "app.py" ]

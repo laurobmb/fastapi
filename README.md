@@ -17,9 +17,9 @@ This project is using FASTAPI inside a container. Just compile the Dockerfile an
 #### Deploy OCP
     oc new-project fastapi
     
-    oc new-app --name fastapi --labels app=fastapi https://github.com/laurobmb/fastapi.git#master --context-dir app --strategy=docker
+    oc new-app --name fastapi --labels app=fastapi https://github.com/laurobmb/fastapi.git#master --context-dir app --strategy=docker --env ENVIROMENT="prod"
 
-    oc new-app --name fastapi --labels app=fastapi https://github.com/laurobmb/fastapi.git#master --context-dir app --strategy=source
+    oc new-app --name fastapi --labels app=fastapi https://github.com/laurobmb/fastapi.git#master --context-dir app --strategy=source --env ENVIROMENT="prod"
 
     oc expose service fastapi
     

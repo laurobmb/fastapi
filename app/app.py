@@ -172,11 +172,15 @@ def checkFileSecret():
 
     if secret_user_file_file_exists:
         secret_user = open(secret_user_file,"r")
+        secret_user = secret_user.read().splitlines()
+        secret_user = ''.join(str(x) for x in secret_user)
     else:
         secret_user = "error"
 
     if secret_pass_file_file_exists:
         secret_pass = open(secret_pass_file,"r")
+        secret_pass = secret_pass.read().splitlines()
+        secret_pass = ''.join(str(x) for x in secret_pass)
     else:
         secret_pass = "error"
 

@@ -188,7 +188,14 @@ def get_current_username(credentials: HTTPBasicCredentials = Depends(security)):
     secret_user,secret_pass = checkFileSecret()
     correct_username = secrets.compare_digest(credentials.username, secret_user)
     correct_password = secrets.compare_digest(credentials.password, secret_pass)
-    if not (correct_username and correct_password) or secret_user == 'error':
+    if secret_user == 'error':
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Incorrect email or password",
+            headers={"WWW-Authenticate": "Basic"},
+        )
+    
+    if not (correct_username and correct_password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect email or password",
@@ -205,5 +212,6 @@ if __name__ == '__main__':
         app, 
         host="0.0.0.0", 
         port=8080,
-        debug=False, 
-        log_level="info")
+        debug=True,
+        log_level="info"
+        )

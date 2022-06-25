@@ -53,7 +53,7 @@ patches:
   patch: |-
     - op: replace
       path: /spec/replicas
-      value: 4
+      value: 1
 
 - target:
     version: v1

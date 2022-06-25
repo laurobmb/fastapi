@@ -17,7 +17,7 @@ spec:
       containers:
       - name: fastapi
         image: quay.io/lagomes/fastapi:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         env:
         - name: ENVIROMENT_INFO
           value: "beta"

@@ -21,17 +21,17 @@ This project is using FASTAPI inside a container. Just compile the Dockerfile an
 
     oc new-app --name fastapi --labels app=fastapi https://github.com/laurobmb/fastapi.git#master --context-dir app --strategy=source --env ENVIROMENT="prod"
 
-    oc expose service fastapi
+    oc -n fastapi expose service fastapi
     
-    oc expose service fastapi --name fastapi-hml --hostname fastapi-fastapi.hml.lagomes.rhbr-lab.com
+    oc -n fastapi expose service fastapi --name fastapi-hml --hostname fastapi-fastapi.hml.lagomes.rhbr-lab.com
 
     oc -n fastapi create secret generic fastapi-secret --from-literal=username=admin --from-literal=password=secret
     
     oc -n fastapi set env --from=secret/fastapi-secret deployment/fastapi
 
-    oc set volume deployment/fastapi --name=secrets-vol --add --mount-path=/opt/secrets/ --secret-name=fastapi-secret --overwrite
+    oc -n fastapi set volume deployment/fastapi --name=secrets-vol --add --mount-path=/opt/secrets/ --secret-name=fastapi-secret --overwrite
 
-    oc -n fastapi create configmap fastapi-page --from-literal=index.html="<html><h1>Welcome</h1></br><h1>Hi! This is a configmap Index file </h1></html>"
+    oc -n fastapi create configmap fastapi-page --from-literal=index.html="<!DOCTYPE html><html><h1><body>This is a configmap file from production environment</h1></html>"
 
     oc -n fastapi set volume deployment/fastapi --name=page-vol --add --mount-path=/opt/config/ --configmap-name=fastapi-page --overwrite
 

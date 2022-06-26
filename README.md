@@ -31,7 +31,6 @@ This project is using FASTAPI inside a container. Just compile the Dockerfile an
 
     oc set volume deployment/fastapi --name=secrets-vol --add --mount-path=/opt/secrets/ --secret-name=fastapi-secret --overwrite
 
-
     oc -n fastapi create configmap fastapi-page --from-literal=index.html="<html><h1>Welcome</h1></br><h1>Hi! This is a configmap Index file </h1></html>"
 
     oc -n fastapi set volume deployment/fastapi --name=page-vol --add --mount-path=/opt/config/ --configmap-name=fastapi-page --overwrite

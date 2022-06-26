@@ -44,10 +44,12 @@ This project is using FASTAPI inside a container. Just compile the Dockerfile an
 
     oc -n fastapi set volume deployment/fastapi --name=page-vol --add --mount-path=/opt/config/ --configmap-name=fastapi-page --overwrite
 
-### Create resources
+### Create resources limits
     oc -n fastapi set resources deployment/fastapi --limits=cpu=200m,memory=128Mi --requests=cpu=100m,memory=64Mi
 
-    oc -n fastapi autoscale deployment fastapi --max 50 --min 3 --cpu-percent=80
+    oc -n fastapi autoscale deployment fastapi --max 10 --min 3 --cpu-percent=80
+
+    oc -n fastapi create quota fastapi-quota --hard=cpu=500m,memory=500Mi
 
 ### Create healthcheck
     oc -n fastapi set probe deployment/fastapi --readiness --initial-delay-seconds=10 --timeout-seconds=30 --get-url=http://:8080/health

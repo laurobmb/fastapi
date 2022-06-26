@@ -225,12 +225,17 @@ def read_current_user(username: str = Depends(get_current_username)):
 
 
 @app.get("/configmap")
-def read_current_user():
+def read_current_configmap():
     page = checkFileConfigMap()
     if page != "error":
         return FileResponse(page)
     else:
         return {"message": "configmap not configured"}
+
+
+@app.get("/health")
+def health():
+    return {"up"}
 
 
 if __name__ == '__main__':

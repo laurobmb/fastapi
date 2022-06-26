@@ -188,6 +188,17 @@ def checkFileSecret():
 
     #configmap = open("/opt/config/page","r")
 
+def checkFileConfigMap():
+    import os.path
+    configmap_user_file="/opt/config/index.html" 
+    configmap_user_file_file_exists = os.path.exists(configmap_user_file)
+
+    if configmap_user_file_file_exists:
+        return configmap_user_file
+    else:
+        configmap = "error"
+        return configmap
+
 def get_current_username(credentials: HTTPBasicCredentials = Depends(security)):
     secret_user,secret_pass = checkFileSecret()
     correct_username = secrets.compare_digest(credentials.username, secret_user)
@@ -207,9 +218,20 @@ def get_current_username(credentials: HTTPBasicCredentials = Depends(security)):
         )
     return credentials.username
 
+
 @app.get("/users")
 def read_current_user(username: str = Depends(get_current_username)):
     return {"username": username}
+
+
+@app.get("/configmap")
+def read_current_user():
+    page = checkFileConfigMap()
+    if page != "error":
+        return FileResponse(page)
+    else:
+        return {"message": "configmap not configured"}
+
 
 if __name__ == '__main__':
     uvicorn.run(

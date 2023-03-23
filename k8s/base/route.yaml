@@ -7,15 +7,11 @@ metadata:
   name: fastapi-route
 spec:
   #host: "PATCH_ME"
-  host: " "
+  host: ""
+  wildcardPolicy: None
   port:
     targetPort: 8080
   to:
     kind: Service
     name: fastapi-service
     weight: 100
-status:
-  ingress:
-  - conditions:
-    - status: "True"
-      type: Admitted

@@ -35,15 +35,15 @@ secretGenerator:
   - password=secret
 
 patches:
-- target:
-    version: v1
-    group: route.openshift.io
-    kind: Route
-    name: fastapi-route
-  patch: |-
-    - op: replace
-      path: /spec/host
-      value: "fastapi-dev.apps.lagomes.rhbr-lab.com"
+#- target:
+#    version: v1
+#    group: route.openshift.io
+#    kind: Route
+#    name: fastapi-route
+#  patch: |-
+#    - op: replace
+#      path: /spec/host
+#      value: "fastapi-dev.apps.lagomes.rhbr-lab.com"
 
 - target:
     version: v1

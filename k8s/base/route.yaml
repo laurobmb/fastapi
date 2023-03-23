@@ -6,7 +6,8 @@ metadata:
     app: fastapi
   name: fastapi-route
 spec:
-  host: "PATCH_ME"
+  #host: "PATCH_ME"
+  host: " "
   port:
     targetPort: 8080
   to:

@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: fastapi
-        image: quay.io/lagomes/fastapi:latest
+        image: imagefastapi
         imagePullPolicy: Always
         env:
         - name: ENVIROMENT_INFO

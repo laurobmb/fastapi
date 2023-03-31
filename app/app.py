@@ -152,6 +152,12 @@ async def pagina():
     return FileResponse('pages/page1.html')
 
 
+@app.get("/ocp")
+async def ocp():
+    message = f'Openshift Container Platform 4.10'
+    return {"message": message}
+
+
 @app.get("/version")
 async def version():
     version = f"{sys.version_info.major}.{sys.version_info.minor}"

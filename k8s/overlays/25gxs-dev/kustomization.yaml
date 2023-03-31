@@ -15,7 +15,7 @@ commonLabels:
 images:
 - name: imagefastapi
   newName: quay.apps.dcrjoamocp02.nfv.nocclaro.com.br/rhel_repo_test/fastapi
-  newTag: v2
+  newTag: v3
 
 configMapGenerator:
 - name: fastapi-cm

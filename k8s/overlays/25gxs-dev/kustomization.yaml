@@ -20,7 +20,7 @@ images:
 configMapGenerator:
 - name: fastapi-cm
   literals:
-  - index.html="<!DOCTYPE html><html><body>This is a configmap to openshift v4.12 file from developer environment</body></html>"
+  - index.html="<!DOCTYPE html><html><body>This is a configmap for development in openshift v4.12 environment</body></html>"
 generatorOptions:
   disableNameSuffixHash: true
   labels:

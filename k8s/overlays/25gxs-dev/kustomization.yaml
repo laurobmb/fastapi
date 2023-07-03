@@ -14,7 +14,7 @@ commonLabels:
 
 images:
 - name: imagefastapi
-  newName: quay.apps.dcrjoamocp02.nfv.nocclaro.com.br/rhel_repo_test/fastapi
+  newName: quay.apps.quay.apps.ocp-infra.df.gov.br/fastapi
   newTag: v4
 
 configMapGenerator:

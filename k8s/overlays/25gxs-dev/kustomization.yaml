@@ -14,7 +14,7 @@ commonLabels:
 
 images:
 - name: imagefastapi
-  newName: quay.apps.ocp-infra.df.gov.br/fastapi
+  newName: quay.apps.ocp-infra.df.gov.br/redhat/fastapi
   newTag: latest
 
 configMapGenerator:

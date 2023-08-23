@@ -14,7 +14,7 @@ commonLabels:
 
 images:
 - name: imagefastapi
-  newName: quayhub-quay-quay-enterprise.apps.ocp-hub.banpara.com/redhat/fastapi
+  newName: quay.apps.ocp-hub.banpara.com/redhat/fastapi
   newTag: latest
 
 configMapGenerator:

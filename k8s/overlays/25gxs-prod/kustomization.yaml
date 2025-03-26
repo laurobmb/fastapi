@@ -13,9 +13,9 @@ commonLabels:
   env: fastapi-prod
 
 images:
-- name: fastapi
+- name: imagefastapi
   newName: quay.io/lagomes/fastapi
-  newTag: latest
+  newTag: master
 
 configMapGenerator:
 - name: fastapi-cm
@@ -43,7 +43,7 @@ patches:
   patch: |-
     - op: replace
       path: /spec/host
-      value: "fastapi-prod.apps.lagomes.rhbr-lab.com"
+      value: "fastapi-prod.apps.acs.acm-lagomes.rhbr-lab.com"
 
 - target:
     version: v1

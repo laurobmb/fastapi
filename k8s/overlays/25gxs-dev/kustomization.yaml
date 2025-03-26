@@ -14,8 +14,8 @@ commonLabels:
 
 images:
 - name: imagefastapi
-  newName: quay.apps.ocp-infra.df.gov.br/redhat/fastapi
-  newTag: latest
+  newName: quay.io/lagomes/fastapi
+  newTag: master
 
 configMapGenerator:
 - name: fastapi-cm
